@@ -3,6 +3,7 @@
 use api\core\Request;
 use modules\groups\infrastructure\filters\FilterGroupsByClassroom;
 use modules\groups\infrastructure\filters\FilterGroupsBySubject;
+use modules\groups\infrastructure\filters\FilterGroupsByTeacher;
 use modules\groups\infrastructure\filters\FilterGroupsByTurn;
 use modules\groups\infrastructure\filters\FilterSelfFinancedGroups;
 use modules\groups\infrastructure\filters\FilterNotNullGroups;
@@ -43,6 +44,11 @@ if ($subject = $query['subject'] ?? null) {
 
 if ($self_financed = $query['selfFinanced'] ?? null) {
     $other_filter = FilterSelfFinancedGroups::of( $self_financed );
+    $filter = $filter->and( $other_filter );
+}
+
+if ($teacher = $query['teacher'] ?? null) {
+    $other_filter = FilterGroupsByTeacher::of( $teacher );
     $filter = $filter->and( $other_filter );
 }
 

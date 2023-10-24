@@ -2,9 +2,7 @@
 
 namespace modules\auth\infrastructure;
 
-use Error;
 use modules\auth\application\LoginStudent;
-use modules\auth\domain\User;
 
 final class AuthService
 {

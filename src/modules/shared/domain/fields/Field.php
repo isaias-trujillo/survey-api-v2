@@ -12,7 +12,7 @@ abstract class Field extends ArrayObject
     public function __construct($input = null)
     {
         try {
-            parent::__construct( ['value' => $this->ensure( $input )] );
+            parent::__construct( [ 'value' => $this->ensure( $input ) ] );
         } catch (Error $error) {
             $this->error = $error->getMessage();
             parent::__construct();

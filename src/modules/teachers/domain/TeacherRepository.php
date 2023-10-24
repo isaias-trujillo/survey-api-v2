@@ -7,6 +7,5 @@ use modules\shared\domain\fields\Id;
 
 interface TeacherRepository
 {
-
     function find(Criteria $criteria) : Teacher;
 }

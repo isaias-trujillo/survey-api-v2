@@ -4,7 +4,6 @@ namespace modules\teachers\infrastructure;
 
 use modules\teachers\application\FindTeacherByDNI;
 use modules\teachers\domain\DNI;
-use modules\teachers\domain\Teacher;
 
 final class TeacherService
 {

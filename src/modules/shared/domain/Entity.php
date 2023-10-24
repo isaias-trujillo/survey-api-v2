@@ -20,9 +20,6 @@ abstract class Entity extends ArrayObject
     {
         $data = [ 'values' => null, 'errors' => null ];
         foreach ($properties as $name => $property) {
-            if (!( $property instanceof Field ) && !( $property instanceof Entity )) {
-                $data['values'][ $name ] = $property;
-            }
             if ($property instanceof Field) {
                 if (!$property->valid()) {
                     $data['errors'][ $name ] = $property->error();
@@ -36,7 +33,14 @@ abstract class Entity extends ArrayObject
                     $data['errors'][ $name ] = $property->errors();
                 }
                 $data['values'][ $name ] = $property;
+                continue;
             }
+            if (is_array( $property )) {
+                $result = $this->mapping( $property );
+                $data['values'][ $name ] = $result['values'];
+                continue;
+            }
+            $data['values'][ $name ] = $property;
         }
         return $data;
     }

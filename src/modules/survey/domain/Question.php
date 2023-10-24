@@ -15,9 +15,19 @@ final class Question extends Field
         ] );
     }
 
+    public static function from(array $data): Question
+    {
+        $option = $data['answer'] instanceof Option ? $data['answer'] : Option::from( $data['answer'] );
+        return new Question(
+            $data['order'],
+            $data['content'],
+            $option
+        );
+    }
+
     public function is_answered(): bool
     {
-        return !empty($this['value']['answer']);
+        return !is_null( $this['value']['answer'] );
     }
 
     protected function ensure($input): array

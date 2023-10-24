@@ -3,8 +3,9 @@
 namespace modules\teachers\application;
 
 use Error;
+use modules\shared\domain\criteria\Criteria;
 use modules\teachers\domain\DNI;
-use modules\teachers\infrastructure\criteria\FilterByDNI;
+use modules\teachers\infrastructure\filters\FilterByDNI;
 
 final class FindTeacherByDNI extends UseCase
 {
@@ -14,7 +15,8 @@ final class FindTeacherByDNI extends UseCase
             return [ 'error' => $dni->error() ];
         }
         try {
-            $criteria = FilterByDNI::of($dni['value']);
+            $filter = FilterByDNI::of($dni['value']);
+            $criteria = Criteria::builder()->filter($filter)->build();
             $teacher= $this->repository->find( $criteria );
             if (!$teacher->valid()){
                 return ['errors' => $teacher->errors()];

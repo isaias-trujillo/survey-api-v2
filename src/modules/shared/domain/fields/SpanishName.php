@@ -20,7 +20,7 @@ abstract class SpanishName extends Field
         if (empty( $text )) {
             throw new InvalidArgumentError("Vacío.");
         }
-        if (preg_match_all( "/[^a-zA-ZñÑáéíóúÁÉÍÓÚ'¿?\s]+/", $text )) {
+        if (preg_match_all( "/[^a-zA-ZñÑáéíóúÁÉÍÓÚüÜ'¿?\s]+/", $text )) {
             throw new InvalidArgumentError("Solo debe contener caracteres alfabéticos ('$text').");
         }
         return ucwords(mb_strtolower($text));

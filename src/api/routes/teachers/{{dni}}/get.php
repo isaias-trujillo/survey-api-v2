@@ -1,7 +1,6 @@
 <?php
 
 use api\core\Request;
-use modules\teachers\domain\DNI;
 use modules\teachers\infrastructure\TeacherService;
 
 $parameters = Request::parameters();
